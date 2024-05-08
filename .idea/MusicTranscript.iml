@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/BasicPitchTCN_prediction" />
       <excludeFolder url="file://$MODULE_DIR$/RawData" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.10.12 WSL (Ubuntu): (/home/siwtan/.virtualenvs/Python_projects/bin/python)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
