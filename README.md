@@ -17,7 +17,7 @@
    - Train a simple CNN model to predict music transcription from the framed Mel spectrograms.
    - The model predicts note events, including ```start time```, ```end time```, ```pitch```, ```velocity```, and ```confidence```.
 
-### Project Structure
+## Project Structure
 
 
 ```plaintext
