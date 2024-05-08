@@ -1,3 +1,8 @@
-./RawData
-./BasicPitchTCN_prediction
-./GoogleMT3
+BasicPitchTCN_prediction/
+GoogleMT3/
+RawData/
+.idea/
+
+# General Python ignores
+*.pyc
+__pycache__/
