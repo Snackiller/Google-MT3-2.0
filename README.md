@@ -1,10 +1,8 @@
 # GoogleMT3
 
-## Using Basic Pitch to Convert Raw Audio Files to Labels
 
-This repository demonstrates the use of Basic Pitch to convert raw audio files into structured labels for music transcription purposes. It contains a pipeline for generating predictions from raw audio files using the Basic Pitch model, followed by processing the output labels into framed Mel spectrograms for training a simple Convolutional Neural Network (CNN).
 
-### Project Overview (Updating)
+## Project Overview (Updating)
 
 1. **Basic Pitch Prediction**:
    - Generate predictions using the Basic Pitch Temporal Convolutional Network (TCN) model.
