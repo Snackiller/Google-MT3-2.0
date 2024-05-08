@@ -4,11 +4,11 @@
 
 ## Project Overview (Updating)
 
-1. **Basic Pitch Prediction**:
+1. **Use ``` Basic Pitch ``` Prediction as Label**:
    - Generate predictions using the Basic Pitch Temporal Convolutional Network (TCN) model.
    - Output includes MIDI files, NPZ model outputs, and CSV files containing note event labels.
 
-2. **Label Processing**:
+2. **Label and Mel Spectrograms Processing**:
    - Extract framed Mel spectrograms from the raw audio files using note event timestamps from Basic Pitch predictions.
    - Create structured datasets for CNN training, aligning the spectrograms with corresponding note event labels.
    - Each Mel spectrogram is set to 2s long for now. This might change in the future.
