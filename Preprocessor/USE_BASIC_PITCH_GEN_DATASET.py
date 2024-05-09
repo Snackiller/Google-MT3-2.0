@@ -60,6 +60,7 @@ def save_spectrogram_frame(y_segment, output_path, sr=22050, n_fft=2048, hop_len
 
 
 # Function to extract and save spectrograms based on note events
+# length of the frame is 2.0 seconds and hop length is 0.5 seconds
 def extract_spectrograms(audio_file, csv_file, spectrogram_dir, frame_length=2.0, hop_length=0.5):
     y, sr = librosa.load(audio_file, sr=None, mono=True)
     note_events = pd.read_csv(csv_file)
