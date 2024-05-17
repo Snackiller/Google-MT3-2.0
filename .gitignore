@@ -6,3 +6,4 @@ READY_datasets/
 # General Python ignores
 *.pyc
 __pycache__/
+/CNN_Prediction_result/
