@@ -270,6 +270,8 @@ def load_tensor_dataset(file_path):
 # Function to predict and save CSV for multiple events
 def predict_and_save_csv_multi_event(model, dataloader, device, output_csv_dir, n_events=10):
     model.eval()
+    os.makedirs(output_csv_dir, exist_ok=True)
+
     predictions_per_audio = {}
 
     with torch.no_grad():
@@ -279,7 +281,7 @@ def predict_and_save_csv_multi_event(model, dataloader, device, output_csv_dir, 
 
             for batch_index, output in enumerate(outputs):
                 audio_prefix = targets[batch_index][0]  # Assuming first item in targets is the prefix
-                frame_start_time = targets[batch_index][1]  # Assuming second item is frame start time
+                frame_start_time = targets[batch_index][1].item()  # Convert tensor to scalar
 
                 if audio_prefix not in predictions_per_audio:
                     predictions_per_audio[audio_prefix] = []
@@ -303,7 +305,6 @@ def predict_and_save_csv_multi_event(model, dataloader, device, output_csv_dir, 
         df.to_csv(os.path.join(output_csv_dir, f"{audio_prefix}_predictions.csv"), index=False)
 
     print(f"Predictions saved to {output_csv_dir}")
-
 
 # Paths
 # Define the directory for data and output
