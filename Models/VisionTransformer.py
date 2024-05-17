@@ -8,6 +8,7 @@ import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as transforms
 from transformers import ViTModel, ViTConfig, ViTImageProcessor
+from time import time
 
 # Dataset Class
 class SpectrogramNoteEventDataset(Dataset):
@@ -139,10 +140,14 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 num_epochs = 10
+start_time = time()
 for epoch in range(num_epochs):
+    epoch_start_time = time()
     train_loss = train(model, train_loader, criterion, optimizer, device)
     val_loss = validate(model, val_loader, criterion, device)
     print(f"Epoch {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+    print(f"Time taken in thie epoch: {time() - epoch_start_time:.2f}s")
+print(f"Total time taken: {time() - start_time:.2f}s")
 
 # Model Saving
 model_path = "vit_music_transcription.pth"

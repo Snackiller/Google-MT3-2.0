@@ -11,6 +11,7 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 import torchvision.transforms as transforms
+from time import time
 # from basic_pitch.inference import predict, Model
 # from basic_pitch import ICASSP_2022_MODEL_PATH
 
@@ -207,11 +208,15 @@ optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training Loop
 num_epochs = 10
+start_time = time()
 for epoch in range(num_epochs):
+    epoch_start_time = time()
     train_loss = train(model, train_loader, criterion, optimizer, device)
     val_loss = validate(model, val_loader, criterion, device)
 
+    print(f"Time taken in thie epoch: {time() - epoch_start_time:.2f}s") 
     print(f"Epoch {epoch + 1}/{num_epochs}, Train Loss: {train_loss:.4f}, Val Loss: {val_loss:.4f}")
+print(f"Total time taken: {time() - start_time:.2f}s")
 
 # Save the Model
 model_path = "multi_event_music_transcription_cnn.pth"
