@@ -2,7 +2,7 @@ BasicPitchTCN_prediction/
 
 RawData/
 #.idea/
-
+READY_datasets/
 # General Python ignores
 *.pyc
 __pycache__/
