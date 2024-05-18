@@ -7,3 +7,5 @@ READY_datasets/
 *.pyc
 __pycache__/
 /CNN_Prediction_result/
+
+*.pth
