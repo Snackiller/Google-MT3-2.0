@@ -47,5 +47,8 @@ GoogleMT3/
    - Run the `USE_BASIC_PITCH_GEN_DATASET.py` file, this script will help create datasets as input of models.
 
 2. **Train the model**
-   - When you prepare your datasets, run the `SimpleCNN.py` to train the CNN model or the `VisionTransformer.py` to
-   train the vision transform model.
+   - When you prepare your datasets, run the `SimpleCNN.py` to train the CNN model or the `VisionTransformer.py` to train the vision transform model.
+   - When the training process finished, you will see the `.pth` models in the same folder.
+
+3. **Use the model**
+   - Load a model from the '.pth' file.
