@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 from transformers import ViTModel, ViTConfig, ViTImageProcessor
 from time import time
 from mtutil import SpectrogramNoteEventDataset
-from mtconfig import SEED
+from mtconfig import SEED, SPECTROGRAM_DIR, CSV_DIR
 
 # Set random seed for reproducibility
 torch.manual_seed(SEED)
@@ -41,12 +41,8 @@ transform = transforms.Compose([
     transforms.Normalize(mean=image_processor.image_mean, std=image_processor.image_std)
 ])
 
-# Dataset and DataLoader Setup
-spectrogram_dir = "../BasicPitchTCN_prediction/spectrograms"
-csv_dir = "../BasicPitchTCN_prediction/csv"
-
 print("Loading dataset...")
-dataset = SpectrogramNoteEventDataset(spectrogram_dir, csv_dir, n_events=10, transform=transform)
+dataset = SpectrogramNoteEventDataset(SPECTROGRAM_DIR, CSV_DIR, n_events=10, transform=transform)
 print(f"Dataset loaded with {len(dataset)} samples")
 
 train_size = int(0.8 * len(dataset))

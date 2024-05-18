@@ -10,7 +10,8 @@ import torchvision.transforms as transforms
 
 from torch.utils.data import Dataset, DataLoader
 from time import time
-from mtconfig import SEED
+from mtutil import SpectrogramNoteEventDataset
+from mtconfig import SEED, SPECTROGRAM_DIR, CSV_DIR
 
 # from basic_pitch.inference import predict, Model
 # from basic_pitch import ICASSP_2022_MODEL_PATH
@@ -119,9 +120,6 @@ def validate(model, dataloader, criterion, device):
 
     return running_loss / len(dataloader)
 
-# Dataset and Dataloader Setup
-spectrogram_dir = "../BasicPitchTCN_prediction/spectrograms"
-csv_dir = "../BasicPitchTCN_prediction/csv"
 output_csv_dir = "../CNN_Prediction_result/"
 
 transform = transforms.Compose([
@@ -130,7 +128,7 @@ transform = transforms.Compose([
 ])
 
 print("Loading dataset...")
-dataset = SpectrogramNoteEventDataset(spectrogram_dir, csv_dir, n_events=10, transform=transform)
+dataset = SpectrogramNoteEventDataset(SPECTROGRAM_DIR, CSV_DIR, n_events=10, transform=transform)
 print(f"Dataset loaded with {len(dataset)} samples")
 
 train_size = int(0.8 * len(dataset))
