@@ -1,10 +1,15 @@
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
+
+from torch.utils.data import DataLoader
 from transformers import ViTModel, ViTConfig, ViTImageProcessor
 from time import time
 from mtutil import SpectrogramNoteEventDataset
+from mtconfig import SEED
+
+# Set random seed for reproducibility
+torch.manual_seed(SEED)
 
 # Load model configuration
 config = ViTConfig.from_pretrained('google/vit-base-patch16-224')

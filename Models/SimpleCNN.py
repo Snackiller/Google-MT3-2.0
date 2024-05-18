@@ -6,11 +6,17 @@ import matplotlib.pyplot as plt
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as transforms
+
+from torch.utils.data import Dataset, DataLoader
 from time import time
+from mtconfig import SEED
+
 # from basic_pitch.inference import predict, Model
 # from basic_pitch import ICASSP_2022_MODEL_PATH
+
+# Set random seed for reproducibility
+torch.manual_seed(SEED)
 
 # CNN Model
 class MultiEventMusicTranscriptionCNN(nn.Module):
