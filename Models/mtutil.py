@@ -2,9 +2,13 @@ import re
 import os
 import pandas as pd
 import numpy as np
+import csv
+import pretty_midi
+import glob
 
 from torch.utils.data import Dataset
 from PIL import Image
+
 
 class SpectrogramNoteEventDataset(Dataset):
     def __init__(self, spectrogram_dir, csv_dir, n_events=10, transform=None):
@@ -63,3 +67,41 @@ class SpectrogramNoteEventDataset(Dataset):
             ]
 
         return image, target, prefix, frame_start
+
+# Function to convert a single CSV file to a MIDI file
+def ConvertCSVToMIDI(csv_file_path, midi_file_path):
+    # Create a PrettyMIDI object
+    midi = pretty_midi.PrettyMIDI()
+    
+    # Create an Instrument instance for an Acoustic Guitar (nylon) instrument (program number 24)
+    guitar = pretty_midi.Instrument(program=24)
+    
+    # Open and read the CSV file
+    with open(csv_file_path, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        # Skip the header row
+        next(reader)
+        
+        for row in reader:
+            start_time, end_time, pitch, velocity, _ = row[:5]
+            start_time = float(start_time)
+            end_time = float(end_time)
+            pitch = int(pitch)
+            velocity = int(float(velocity) * 127)
+            
+            # Ensure pitch and velocity are within the MIDI range
+            pitch = max(0, min(127, pitch))
+            velocity = max(0, min(127, velocity))
+            
+            # Create a Note instance, starting at `start_time` seconds and ending at `end_time` seconds
+            note = pretty_midi.Note(velocity=velocity, pitch=pitch, start=start_time, end=end_time)
+            
+            # Add the note to the instrument
+            guitar.notes.append(note)
+    
+    # Add the instrument to the PrettyMIDI object
+    midi.instruments.append(guitar)
+    
+    # Write out the MIDI data
+    midi.write(midi_file_path)
+    print(f"MIDI file has been saved to {midi_file_path}")
