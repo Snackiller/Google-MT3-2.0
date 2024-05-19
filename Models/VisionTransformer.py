@@ -7,6 +7,7 @@ from transformers import ViTModel, ViTConfig, ViTImageProcessor
 from time import time
 from mtutil import SpectrogramNoteEventDataset
 from mtconfig import SEED, SPECTROGRAM_DIR, CSV_DIR
+from mtmodels import ViTForRegression
 
 # Set random seed for reproducibility
 torch.manual_seed(SEED)
@@ -14,6 +15,7 @@ torch.manual_seed(SEED)
 # Load model configuration
 config = ViTConfig.from_pretrained('google/vit-base-patch16-224')
 
+<<<<<<< Updated upstream
 class ViTForRegression(nn.Module):
     def __init__(self, vit_model, config, num_features):
         super(ViTForRegression, self).__init__()
@@ -26,6 +28,8 @@ class ViTForRegression(nn.Module):
         logits = self.regressor(sequence_output)
         return logits
 
+=======
+>>>>>>> Stashed changes
 # Initialize the Vision Transformer model
 model = ViTModel(config)
 model = ViTForRegression(model, config, num_features=50)

@@ -12,6 +12,7 @@ from torch.utils.data import Dataset, DataLoader
 from time import time
 from mtutil import SpectrogramNoteEventDataset
 from mtconfig import SEED, SPECTROGRAM_DIR, CSV_DIR
+from mtmodels import MultiEventMusicTranscriptionCNN
 
 # from basic_pitch.inference import predict, Model
 # from basic_pitch import ICASSP_2022_MODEL_PATH
@@ -19,36 +20,6 @@ from mtconfig import SEED, SPECTROGRAM_DIR, CSV_DIR
 # Set random seed for reproducibility
 torch.manual_seed(SEED)
 
-# CNN Model
-class MultiEventMusicTranscriptionCNN(nn.Module):
-    def __init__(self, n_events=10):
-        super(MultiEventMusicTranscriptionCNN, self).__init__()
-        self.n_events = n_events
-        self.output_size = n_events * 5
-
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
-        self.conv3 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
-        self.fc1 = nn.Linear(64 * 8 * 8, 128)
-        self.fc2 = nn.Linear(128, self.output_size)
-
-        self.relu = nn.ReLU()
-        self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
-
-    def forward(self, x):
-        x = self.relu(self.conv1(x))
-        x = self.maxpool(x)
-
-        x = self.relu(self.conv2(x))
-        x = self.maxpool(x)
-
-        x = self.relu(self.conv3(x))
-        x = self.maxpool(x)
-
-        x = x.view(x.size(0), -1)
-        x = self.relu(self.fc1(x))
-        x = self.fc2(x)
-        return x.view(x.size(0), self.n_events, 5)
 # Prediction and CSV Saving Function
 def predict_and_save_csv_multi_event(model, dataloader, device, output_csv_dir, n_events=10):
     model.eval()
