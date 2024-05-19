@@ -15,21 +15,6 @@ torch.manual_seed(SEED)
 # Load model configuration
 config = ViTConfig.from_pretrained('google/vit-base-patch16-224')
 
-<<<<<<< Updated upstream
-class ViTForRegression(nn.Module):
-    def __init__(self, vit_model, config, num_features):
-        super(ViTForRegression, self).__init__()
-        self.vit = vit_model
-        self.regressor = nn.Linear(config.hidden_size, num_features)
-
-    def forward(self, pixel_values):
-        outputs = self.vit(pixel_values)
-        sequence_output = outputs.last_hidden_state[:, 0]  # Use the CLS token's output
-        logits = self.regressor(sequence_output)
-        return logits
-
-=======
->>>>>>> Stashed changes
 # Initialize the Vision Transformer model
 model = ViTModel(config)
 model = ViTForRegression(model, config, num_features=50)
