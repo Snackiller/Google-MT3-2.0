@@ -9,3 +9,4 @@ __pycache__/
 /CNN_Prediction_result/
 
 *.pth
+*.mid
