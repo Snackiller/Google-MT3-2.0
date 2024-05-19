@@ -14,7 +14,6 @@ torch.manual_seed(SEED)
 # Load model configuration
 config = ViTConfig.from_pretrained('google/vit-base-patch16-224')
 
-# Replace the classifier head with a regression-friendly output layer
 class ViTForRegression(nn.Module):
     def __init__(self, vit_model, config, num_features):
         super(ViTForRegression, self).__init__()
