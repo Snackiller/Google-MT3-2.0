@@ -1,5 +1,5 @@
 BasicPitchTCN_prediction/
-
+organized_data/
 RawData/
 #.idea/
 READY_datasets/
@@ -11,3 +11,4 @@ __pycache__/
 *.pth
 *.mid
 *.csv
+/midiarry2midi.py
